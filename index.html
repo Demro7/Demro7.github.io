@@ -38,21 +38,23 @@
 </head>
 
 <body class="bg-gray-900 text-gray-100">
-
 <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
   <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
     <a href="#" class="text-2xl font-bold text-white">Ahmed Eldemery.</a>
-    
+
+    <!-- Desktop Menu -->
     <div class="hidden md:flex space-x-8">
-      <a href="#hero" class="text-gray-300 hover:text-white transition">Home</a>
-      <a href="#experience" class="text-gray-300 hover:text-white transition">Experience</a>
-      <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
-      <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
-      <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
+      <a href="#hero" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+      <a href="#experience" class="text-gray-300 hover:text-white transition duration-300">Experience</a>
+      <a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Projects</a>
+      <a href="#skills" class="text-gray-300 hover:text-white transition duration-300">Skills</a>
+      <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
     </div>
 
+    <!-- Mobile Menu Button -->
     <div class="md:hidden">
-      <button id="burger" class="text-white focus:outline-none">
+      <button id="burger-btn" class="text-gray-300 hover:text-white focus:outline-none">
+        <!-- Burger Icon -->
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
@@ -60,15 +62,17 @@
     </div>
   </nav>
 
-  <div id="mobile-menu" class="md:hidden bg-gray-800 hidden">
-    <a href="#hero" class="block px-6 py-3 text-gray-300 hover:text-white transition">Home</a>
-    <a href="#experience" class="block px-6 py-3 text-gray-300 hover:text-white transition">Experience</a>
-    <a href="#projects" class="block px-6 py-3 text-gray-300 hover:text-white transition">Projects</a>
-    <a href="#skills" class="block px-6 py-3 text-gray-300 hover:text-white transition">Skills</a>
-    <a href="#contact" class="block px-6 py-3 text-gray-300 hover:text-white transition">Contact</a>
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90 backdrop-blur-md">
+    <div class="flex flex-col px-6 py-4 space-y-4">
+      <a href="#hero" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+      <a href="#experience" class="text-gray-300 hover:text-white transition duration-300">Experience</a>
+      <a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Projects</a>
+      <a href="#skills" class="text-gray-300 hover:text-white transition duration-300">Skills</a>
+      <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
+    </div>
   </div>
 </header>
-
 <section id="hero" class="container mx-auto px-6 py-24 flex flex-col md:flex-row items-center">
   <div class="md:w-3/5 text-center md:text-left mb-12 md:mb-0">
     <span class="text-indigo-400 font-semibold text-lg">Ahmed Hassan Eldemery</span>
@@ -205,30 +209,15 @@
 
 <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- Initialize Lucide Icons ---
-    lucide.createIcons();
+  const burgerBtn = document.getElementById("burger-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-    // --- Mobile Menu Toggle ---
-    const burger = document.getElementById("burger");
-    const mobileMenu = document.getElementById("mobile-menu");
-
-    burger.addEventListener("click", () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    // --- Close Menu When a Link is Clicked ---
-    const navLinks = document.querySelectorAll('#mobile-menu a');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        // We add 'hidden' to ensure the menu closes, not toggles
-        mobileMenu.classList.add('hidden');
-      });
-    });
-
+  burgerBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    mobileMenu.classList.toggle("flex");
   });
 </script>
 
 </body>
 </html>
+
