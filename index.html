@@ -38,10 +38,16 @@
       opacity: 1;
       transform: translateY(0);
     }
-
-    /* Style for the smooth menu animation */
-    .nav-transition {
+    
+    /* --- Styles for Mobile Menu Animation --- */
+    #mobile-menu {
+      max-height: 0;
+      overflow: hidden;
       transition: max-height 0.5s ease-in-out;
+    }
+
+    #mobile-menu.is-open {
+      max-height: 500px; /* A large enough value to show all links */
     }
   </style>
 </head>
@@ -62,14 +68,14 @@
 
     <div class="md:hidden">
       <button id="burger" class="text-white focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
     </div>
   </nav>
 
-  <div id="mobile-menu" class="md:hidden bg-gray-800 flex flex-col nav-transition max-h-0 overflow-hidden">
+  <div id="mobile-menu" class="md:hidden bg-gray-800 flex flex-col">
     <a href="#hero" class="block px-6 py-3 text-gray-300 hover:text-white transition">Home</a>
     <a href="#experience" class="block px-6 py-3 text-gray-300 hover:text-white transition">Experience</a>
     <a href="#projects" class="block px-6 py-3 text-gray-300 hover:text-white transition">Projects</a>
@@ -307,36 +313,34 @@
   const mobileMenu = document.getElementById("mobile-menu");
 
   burger.addEventListener("click", () => {
-    // Check if menu is open (has a maxHeight that is not 0)
-    if (mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== "0px") {
-      mobileMenu.style.maxHeight = "0px"; // Close it
-    } else {
-      // Open it by setting maxHeight to its full content height
-      mobileMenu.style.maxHeight = mobileMenu.scrollHeight + "px";
-    }
+    mobileMenu.classList.toggle('is-open');
   });
 
   // --- Smooth scroll & Close mobile menu on link click ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
+      const href = this.getAttribute("href");
 
-      // Smooth scroll to the target element with an offset for the sticky header
-      if (target) {
-          const headerOffset = 80; // Adjust this value to match your header's height
-          const elementPosition = target.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      // Only prevent default for internal links
+      if (href.startsWith("#")) {
+        e.preventDefault();
+        const target = document.querySelector(href);
 
-          window.scrollTo({
-              top: offsetPosition,
-              behavior: "smooth"
-          });
+        if (target) {
+            const headerOffset = 80; // Adjust to your header's height
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
       }
 
       // Close the mobile menu if it's open
-      if (mobileMenu.style.maxHeight && mobileMenu.style.maxHeight !== "0px") {
-        mobileMenu.style.maxHeight = "0px";
+      if (mobileMenu.classList.contains('is-open')) {
+        mobileMenu.classList.remove('is-open');
       }
     });
   });
