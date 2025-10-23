@@ -51,26 +51,41 @@
   </head>
 
   <body class="bg-gray-900 text-gray-100">
-    <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
-      <nav
-        class="container mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <a href="#" class="text-2xl font-bold text-white">Ahmed Eldemery.</a>
-        <div class="hidden md:flex space-x-8">
-          <a href="#hero" class="text-gray-300 hover:text-white transition duration-300">Home</a>
-          <a href="#experience" class="text-gray-300 hover:text-white transition duration-300">Experience</a>
-          <a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Projects</a>
-          <a href="#skills" class="text-gray-300 hover:text-white transition duration-300">Skills</a>
-          <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
-        </div>
-        <a
-          href="#contact"
-          class="md:hidden bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-300"
-        >
-          Contact
-        </a>
-      </nav>
-    </header>
+   <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold text-white">Ahmed Eldemery.</a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex space-x-8">
+      <a href="#hero" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+      <a href="#experience" class="text-gray-300 hover:text-white transition duration-300">Experience</a>
+      <a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Projects</a>
+      <a href="#skills" class="text-gray-300 hover:text-white transition duration-300">Skills</a>
+      <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden">
+      <button id="burger-btn" class="text-gray-300 hover:text-white focus:outline-none">
+        <!-- Burger Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90 backdrop-blur-md">
+    <div class="flex flex-col px-6 py-4 space-y-4">
+      <a href="#hero" class="text-gray-300 hover:text-white transition duration-300">Home</a>
+      <a href="#experience" class="text-gray-300 hover:text-white transition duration-300">Experience</a>
+      <a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Projects</a>
+      <a href="#skills" class="text-gray-300 hover:text-white transition duration-300">Skills</a>
+      <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
+    </div>
+  </div>
+</header>
 
     <!-- Hero Section -->
     <section id="hero" class="container mx-auto px-6 py-24 flex flex-col md:flex-row items-center">
@@ -347,6 +362,18 @@
 
     <script src="https://unpkg.com/lucide/dist/lucide.min.js"></script>
     <script>lucide.replace()</script>
+    
+<script>
+  const burgerBtn = document.getElementById("burger-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  burgerBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    mobileMenu.classList.toggle("flex");
+  });
+</script>
+
   </body>
 </html>
+
 
