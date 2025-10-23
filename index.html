@@ -46,39 +46,38 @@
 </head>
 
 <body class="bg-gray-900 text-gray-100">
-  <!-- Navbar -->
-  <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
-    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold text-white">Ahmed Eldemery.</a>
-      
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex space-x-8">
-        <a href="#hero" class="text-gray-300 hover:text-white transition duration-300">Home</a>
-        <a href="#experience" class="text-gray-300 hover:text-white transition duration-300">Experience</a>
-        <a href="#projects" class="text-gray-300 hover:text-white transition duration-300">Projects</a>
-        <a href="#skills" class="text-gray-300 hover:text-white transition duration-300">Skills</a>
-        <a href="#contact" class="text-gray-300 hover:text-white transition duration-300">Contact</a>
-      </div>
-
-      <!-- Mobile Burger -->
-      <div class="md:hidden">
-        <button id="burger" class="text-white focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden nav-transition bg-gray-800">
-      <a href="#hero" class="block px-6 py-3 text-gray-300 hover:text-white transition duration-300">Home</a>
-      <a href="#experience" class="block px-6 py-3 text-gray-300 hover:text-white transition duration-300">Experience</a>
-      <a href="#projects" class="block px-6 py-3 text-gray-300 hover:text-white transition duration-300">Projects</a>
-      <a href="#skills" class="block px-6 py-3 text-gray-300 hover:text-white transition duration-300">Skills</a>
-      <a href="#contact" class="block px-6 py-3 text-gray-300 hover:text-white transition duration-300">Contact</a>
+  <!-- Navbar --><header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50">
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#" class="text-2xl font-bold text-white">Ahmed Eldemery.</a>
+    
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex space-x-8">
+      <a href="#hero" class="text-gray-300 hover:text-white transition">Home</a>
+      <a href="#experience" class="text-gray-300 hover:text-white transition">Experience</a>
+      <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
+      <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
+      <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
     </div>
-  </header>
+
+    <!-- Mobile Burger -->
+    <div class="md:hidden">
+      <button id="burger" class="text-white focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-gray-800 flex flex-col">
+    <a href="#hero" class="block px-6 py-3 text-gray-300 hover:text-white">Home</a>
+    <a href="#experience" class="block px-6 py-3 text-gray-300 hover:text-white">Experience</a>
+    <a href="#projects" class="block px-6 py-3 text-gray-300 hover:text-white">Projects</a>
+    <a href="#skills" class="block px-6 py-3 text-gray-300 hover:text-white">Skills</a>
+    <a href="#contact" class="block px-6 py-3 text-gray-300 hover:text-white">Contact</a>
+  </div>
+</header>
 
   <!-- Hero Section -->
   <section id="hero" class="container mx-auto px-6 py-24 flex flex-col md:flex-row items-center">
@@ -269,31 +268,40 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-20 gradient-bg">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-4xl font-extrabold text-white mb-4">Let's Talk!</h2>
-      <p class="text-lg text-gray-200 max-w-2xl mx-auto mb-10">
-        I'm currently available for internship or work opportunities. Feel free to reach out.
-      </p>
+<section id="contact" class="py-20 gradient-bg text-center">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-white mb-4">Let's Talk!</h2>
+    <p class="text-lg text-gray-200 max-w-2xl mx-auto mb-10">
+      I'm currently available for internship or work opportunities. Feel free to reach out.
+    </p>
 
-      <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6">
-        <!-- Email -->
-        <a href="mailto:ahmedeldemery68@gmail.com" class="inline-flex items-center bg-white text-indigo-700 text-lg font-bold px-6 py-3 rounded-xl shadow-2xl hover:bg-gray-100 transition duration-300">
-          <i data-lucide="mail" class="w-5 h-5 mr-2"></i>Email Me
-        </a>
+    <div class="flex flex-col sm:flex-row justify-center gap-6">
+      <!-- Email -->
+      <a href="mailto:ahmedeldemery68@gmail.com" class="inline-flex items-center bg-white text-indigo-700 font-bold px-6 py-3 rounded-xl shadow hover:bg-gray-100 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m0 0l4-4m-4 4l4 4"/>
+        </svg>
+        Email Me
+      </a>
 
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/ahmedeldemery/" target="_blank" class="inline-flex items-center bg-indigo-600 text-white text-lg font-bold px-6 py-3 rounded-xl shadow-2xl hover:bg-indigo-700 transition duration-300">
-          <i data-lucide="linkedin" class="w-5 h-5 mr-2"></i>LinkedIn
-        </a>
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/ahmedeldemery/" target="_blank" class="inline-flex items-center bg-blue-600 text-white font-bold px-6 py-3 rounded-xl shadow hover:bg-blue-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4 4h4v16H4V4zm6 0h4v2h.1c.6-1 2-2 4-2 4.4 0 5 2.9 5 6.7V20h-4v-6.3c0-1.5-.1-3.4-2-3.4s-2 1.4-2 3.3V20h-4V4z"/>
+        </svg>
+        LinkedIn
+      </a>
 
-        <!-- GitHub -->
-        <a href="https://github.com/Demro7" target="_blank" class="inline-flex items-center bg-gray-700 text-white text-lg font-bold px-6 py-3 rounded-xl shadow-2xl hover:bg-gray-600/80 transition duration-300">
-          <i data-lucide="github" class="w-5 h-5 mr-2"></i>GitHub
-        </a>
-      </div>
+      <!-- GitHub -->
+      <a href="https://github.com/Demro7" target="_blank" class="inline-flex items-center bg-gray-700 text-white font-bold px-6 py-3 rounded-xl shadow hover:bg-gray-600 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48v-1.7c-2.78.61-3.37-1.34-3.37-1.34-.46-1.17-1.12-1.48-1.12-1.48-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.9 1.54 2.36 1.1 2.94.84.09-.65.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02A9.54 9.54 0 0112 6.8c.85.004 1.7.11 2.5.32 1.9-1.29 2.74-1.02 2.74-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10.02 10.02 0 0022 12c0-5.52-4.48-10-10-10z"/>
+        </svg>
+        GitHub
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
   <script src="https://unpkg.com/lucide/dist/lucide.min.js"></script>
   <script>
@@ -326,5 +334,16 @@
       });
     });
   </script>
+  
+<script>
+  // Mobile Menu Toggle
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobile-menu');
+
+  burger.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
 </body>
 </html>
+
