@@ -1,12 +1,12 @@
 <!-- Animated header -->
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?color=00C2FF&size=30&center=true&vCenter=true&width=800&lines=Machine+Learning+Engineer;Data+Scientist;EDA+%26+Visualization+Specialist;AI+%26+Computer+Vision+Enthusiast;Lifelong+Learner" alt="Typing Animation" />
+  <img src="https://readme-typing-svg.herokuapp.com?color=00C2FF&size=30&center=true&vCenter=true&width=800&lines=AI+Engineer+%26+Data+Scientist;Machine+Learning+Engineer;EDA+%26+Visualization+Specialist;Computer+Vision+%26+NLP+Enthusiast;Lifelong+Learner" alt="Typing Animation" />
 </p>
 
 <h1 align="center">Hey there! 👋 I'm Ahmed Hassan Eldemery</h1>
 
 <p align="center">
-  Machine Learning Engineer | Data Science & AI Enthusiast
+  AI Engineer & Data Scientist | Machine Learning Enthusiast
 </p>
 
 <p align="center">
@@ -60,6 +60,10 @@
   🏆 **3rd Place — Ibtikar 8 Innovation Competition**
   **Tech Stack:** Python · OpenCV · Computer Vision
 
+- [**YAQIZ — AI-Powered Awareness Assistant**](https://github.com/Demro7/YAQIZ)
+  An intelligent AI assistant designed to enhance awareness and alertness. Leverages machine learning and natural language processing to provide smart, context-aware responses and insights.
+  **Tech Stack:** Python · AI · NLP
+
 ---
 
 ### 🛠 Technical Skills
@@ -79,7 +83,7 @@
   <a href="https://www.linkedin.com/in/ahmed-eldemery-a210aa306/"><img src="https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=linkedin&logoColor=white"/></a>
   <a href="https://github.com/Demro7"><img src="https://img.shields.io/badge/-GitHub-181717?style=flat&logo=github&logoColor=white"/></a>
   <a href="https://www.kaggle.com/ahmedeldemery"><img src="https://img.shields.io/badge/-Kaggle-20BEFF?style=flat&logo=kaggle&logoColor=white"/></a>
-  <img src="https://img.shields.io/badge/-Phone-black?style=flat&logo=phone&logoColor=white"/> +20 109 467 0920
+  <img src="https://img.shields.io/badge/-Phone-black?style=flat&logo=phone&logoColor=white"/> +20 155 083 0821
 </p>
 
 ---
