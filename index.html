@@ -190,7 +190,7 @@
   
   <!-- YAQIZ Project Image -->
   <img
-    src="yaqiz.png"
+    src="YAQIZ.png"
     alt="YAQIZ AI Assistant Project"
     class="w-full h-48 object-contain bg-gray-900 p-4"
   />
@@ -278,18 +278,23 @@
 
 <script src="https://unpkg.com/lucide@latest/dist/lucide.min.js"></script>
 <script>
+  // تشغيل الأيقونات
+  lucide.createIcons();
+
+  // الموبايل منيو
   const burgerBtn = document.getElementById("burger-btn");
   const mobileMenu = document.getElementById("mobile-menu");
 
-  burgerBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-    mobileMenu.classList.toggle("flex");
-  });
+  if (burgerBtn && mobileMenu) {
+    burgerBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      mobileMenu.classList.toggle("flex");
+    });
+  }
 </script>
 
 </body>
 </html>
-
 
 
 
