@@ -1235,7 +1235,12 @@ footer {
   }
   
   .hero-title {
-    font-size: 40px;
+    font-size: 38px;
+  }
+  
+  .avatar-wrapper {
+    width: 260px;
+    height: 260px;
   }
   
   .timeline::before {
@@ -1244,6 +1249,7 @@ footer {
   
   .timeline-item {
     width: 100%;
+    left: 0 !important;
     padding-left: 40px !important;
     padding-right: 0 !important;
     text-align: left !important;
