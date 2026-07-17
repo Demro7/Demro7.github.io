@@ -1255,6 +1255,10 @@ footer {
     text-align: left !important;
   }
   
+  .timeline-content {
+    padding: 20px;
+  }
+  
   .timeline-dot {
     left: 12px !important;
     right: auto !important;
