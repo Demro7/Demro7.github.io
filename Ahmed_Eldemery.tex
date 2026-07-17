@@ -1,0 +1,154 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+
+\titleformat{\section}{
+  \vspace{-5pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\begin{document}
+
+% ================= Header =================
+\begin{center}
+    {\Huge \textbf{Ahmed Hassan Eldemery}} \\ \vspace{2mm}
+    {\Large AI Engineer | Machine Learning Engineer} \\ \vspace{2mm}
+    Mansoura, Egypt | +201094670920 | \href{mailto:ahmedeldemery68@gmail.com}{ahmedeldemery68@gmail.com} \\ \vspace{1mm}
+    \href{https://www.linkedin.com/in/ahmed-eldemery-a210aa306/}{LinkedIn} |
+    \href{https://github.com/Demro7}{GitHub} |
+    \href{https://www.kaggle.com/ahmedeldemery}{Kaggle}
+\end{center}
+
+% ================= Summary =================
+\section{Professional Summary}
+AI Engineer and Machine Learning professional specializing in end-to-end ML pipelines, LLM-powered applications, and intelligent automation systems. Skilled in backend API development, computer vision, and prompt engineering using Python, FastAPI, Scikit-learn, OpenCV, and MongoDB. Currently building production-grade systems for multimodal AI classification and business automation at Try GC, delivering measurable impact on real-world operational challenges.
+% ================= Education =================
+\section{Education}
+\textbf{Bachelor of Computer Science (Minor in Artificial Intelligence)} \hfill Oct 2023 -- July 2027 (Expected) \\
+\textit{Mansoura University} \hfill Mansoura, Egypt
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item \textbf{Relevant Coursework:} Linear Algebra, Probability \& Statistics, Data Structures, Machine Learning, Computer Vision
+\end{itemize}
+
+% ================= Skills =================
+\section{Technical Skills}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item \textbf{AI \& LLMs:} LLM Integration, Prompt Engineering, LangChain, RAG, Generative AI, Groq API, Llama 3, OpenAI API
+    \item \textbf{Machine Learning:} Scikit-learn, XGBoost, Regression, Classification, Clustering, Feature Engineering
+    \item \textbf{Computer Vision \& Speech:} OpenCV, YOLOv8, PaddleOCR, MediaPipe, TalkNet, Whisper, CLIP
+    \item \textbf{Data \& Visualization:} Pandas, NumPy, Matplotlib, Seaborn, Exploratory Data Analysis (EDA)
+    \item \textbf{Backend \& Frontend:} FastAPI, Flask, React, REST APIs, WebSockets, JWT Authentication, PGVector, Qdrant
+    \item \textbf{Tools \& Architecture:} Python, SQL, Git, Docker, Docker Compose, Microservices, Chrome Extensions (MV3)
+\end{itemize}
+
+% ================= Experience =================
+\section{Professional Experience}
+
+\textbf{AI Specialist} \hfill Apr 2026 -- Present \\
+\textit{Try GC (Formerly Grand Community)} \hfill On Site
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Built a multimodal influencer classification system processing \textbf{60,000+ profiles}, combining computer vision (face/video analysis) and speech models (TalkNet, Whisper) to auto-classify creators.
+    \item Developed a Manifest V3 Chrome Extension and FastAPI backend to record meetings, transcribe Arabic conversations via Whisper, and extract structured marketing insights using Llama-3.3 via Groq.
+    \item Designed LLM integration pipelines and prompt workflows, reducing manual operational efforts across the company's core database.
+\end{itemize}
+
+\vspace{2mm}
+
+\textbf{Machine Learning Engineer Trainee} \hfill June 2025 -- Dec 2025 \\
+\textit{Huawei \& Mansoura University Collaboration} \hfill Mansoura, Egypt
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Engineered end-to-end ML pipelines (Python, Scikit-learn), improving model accuracy by $\sim$12\% via feature engineering.
+    \item Trained and evaluated supervised and unsupervised models on real-world datasets.
+\end{itemize}
+
+\vspace{2mm}
+
+\textbf{Machine Learning Engineer Intern} \hfill July 2025 -- Aug 2025 \\
+\textit{National Telecommunication Institute (NTI)} \hfill Mansoura, Egypt
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Developed a predictive analytics model using Scikit-learn to forecast e-commerce customer spending behavior.
+    \item Executed end-to-end ML data pipelines, enabling data-driven insights from historical sales data.
+\end{itemize}
+
+% ================= Projects =================
+\section{Key Projects}
+
+\textbf{\href{https://github.com/Demro7/influencer-video-classifier}{Influencer Video Classifier (Try GC)}} \hfill \textit{Python, OpenCV, TalkNet, Whisper}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Engineered a scalable production pipeline combining computer vision with speech models to classify creators based on content type and speaking style.
+    \item Automated marketing operations by fully replacing manual classification workflows across a massive database.
+\end{itemize}
+
+\vspace{1mm}
+
+\textbf{\href{https://github.com/Demro7/ai-meeting-assistant}{AI Meeting Assistant (Try GC)}} \hfill \textit{FastAPI, Chrome Extension (MV3), Groq API, Whisper}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Engineered a Manifest V3 Chrome Extension utilizing offscreen documents to bypass service worker constraints for real-time audio mixing and secure microphone capture.
+    \item Built a stateless FastAPI backend with strict Pydantic validation to process audio chunks via Groq's Whisper-large-v3 and extract structured Arabic marketing insights using Llama-3.3 in JSON mode.
+\end{itemize}
+
+\vspace{1mm}
+
+\textbf{\href{https://github.com/Demro7/VoltIQ-}{VoltIQ — Smart Electricity Platform}} \hfill \textit{FastAPI, Flask, YOLOv8, PaddleOCR, XGBoost, PGVector, Docker}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Architected a microservices AI platform combining computer vision OCR, predictive ML, and a RAG document assistant.
+    \item Built an OpenCV/PaddleOCR pipeline to read LCD 7-segment displays and trained XGBoost models for anomaly detection and balance depletion forecasting.
+    \item Deployed a FastAPI RAG microservice utilizing PGVector/Qdrant and LLMs (Gemini/OpenAI) for context-grounded Q\&A.
+\end{itemize}
+
+\vspace{1mm}
+
+\textbf{\href{https://github.com/Demro7/YAQIZ}{YAQIZ — AI Workplace Safety \& Fatigue Monitoring}} \hfill \textit{FastAPI, React, YOLOv8, MediaPipe, Docker}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Built a full-stack platform combining YOLOv8 PPE detection with ByteTrack worker tracking and MediaPipe fatigue analysis.
+    \item Engineered WebSocket pipelines for live video streaming and containerized the full stack using Docker for scalable deployment.
+\end{itemize}
+
+\vspace{1mm}
+
+\textbf{\href{https://github.com/Demro7/Digital-Employee}{Digital Employee – AI MSME Sales Assistant}} \hfill \textit{Python, Flask, OpenAI API, MongoDB, JWT}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Built a bilingual LLM chat assistant converting conversations into structured orders with auto-generated IDs.
+    \item Implemented role-based access, low-stock alerts, and config-driven workflows for 10+ business sectors.
+\end{itemize}
+
+\vspace{1mm}
+
+\textbf{\href{https://github.com/magedyasse/ErgoAi}{ErgoAI – Intelligent Health \& Productivity Assistant}} \hfill \textit{Python, OpenCV, Computer Vision}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Developed an AI-powered desktop app utilizing OpenCV to detect blink rate, yawning, and posture at $\sim$20 FPS.
+    \item Achieved \textbf{3rd Place} in the Computer Vision Course (Mansoura University) and \textbf{3rd Place} at the Ibtikar 8 Innovation Competition.
+\end{itemize}
+
+\vspace{1mm}
+
+\textbf{Data \& Academic Projects} \hfill \textit{Scikit-learn, GMM, Pandas}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item Developed predictive E-commerce spending models, USA Adult Income EDA, and unsupervised GMM Image Segmentation pipelines.
+\end{itemize}
+
+% ================= Hackathons =================
+\section{Hackathons \& Competitions}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item \textbf{Huawei Developer Competition (Northern Africa):} Advanced to Top 50 teams (Team Sanad) presenting an AI-driven solution in a regional competitive environment (2025).
+    \item \textbf{First AI Summit Week Hackathon (Mansoura Univ):} Developed and exhibited the initial prototype of the Digital Employee Assistant alongside teams from 16 universities (2026).
+    \item \textbf{Egypt Hackathon 4.0 (GDG Delta):} Built the initial prototype of YAQIZ in a highly competitive hackathon among 120+ teams and 600+ developers (2025).
+\end{itemize}
+
+% ================= Honors =================
+\section{Honors \& Certificates}
+\begin{itemize}[noitemsep, topsep=0pt, leftmargin=*]
+    \item \textbf{Awards:} 3rd Place – Ibtikar 8 Innovation Comp (2025) | 2nd Place – AI Course Comp (Apr 2025) | Digitopia Semi-Finalist (June 2025).
+    \item \textbf{ALX Africa Data Science Program:} 15-month intensive track in Data Analytics and Machine Learning (June 2026).
+    \item \textbf{Certifications:} NVIDIA (Building LLM Applications, AI for All) | Intro to Machine Learning (Grade: Excellent) | Applied Data Science \& Python.
+\end{itemize}
+
+\end{document}
