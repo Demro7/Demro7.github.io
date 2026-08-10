@@ -116,6 +116,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 5. Project Detailed Modals Data (Updated image paths to point directly to local root folder)
   const projectsData = {
+    "howeya-seo-ai": {
+      title: "Howeya SEO-AI (Howeyah)",
+      category: "AI & Automation",
+      image: "howeya-seo-ai.jpg",
+      impact: "Achieved 21/21 passing PostgreSQL tests and 394/394 passing regression tests, ensuring production-grade reliability for AI-driven SEO recommendations.",
+      desc: "Contributed to an AI-powered SEO platform analyzing, optimizing, and improving WordPress websites through automated AI-driven recommendations and validation workflows. Built multi-stage validation pipelines including live validation, SEO rules, and freshness checks with an evidence management system ensuring recommendations were accurate, auditable, and safe to apply.",
+      features: [
+        "Built multi-stage validation pipelines (live validation, SEO rules, freshness checks) and evidence management system",
+        "Ensured AI-generated recommendations were accurate, auditable, and safe to apply",
+        "Improved crawl engine reliability and WordPress media/Alt Text automation",
+        "Achieved 21/21 passing PostgreSQL tests and 394/394 passing regression tests"
+      ],
+      tech: ["Python", "FastAPI", "PostgreSQL", "WordPress REST API", "Pytest", "Docker"],
+      link: null
+    },
     "influencer-classifier": {
       title: "Influencer Video Classifier (Try GC)",
       category: "Computer Vision & Speech",
@@ -270,7 +285,12 @@ document.addEventListener("DOMContentLoaded", () => {
     modalTitle.textContent = data.title;
     modalImpactDesc.textContent = data.impact;
     modalDesc.textContent = data.desc;
-    modalGithubLink.href = data.link;
+    if (data.link) {
+      modalGithubLink.href = data.link;
+      modalGithubLink.style.display = "";
+    } else {
+      modalGithubLink.style.display = "none";
+    }
 
     // Clear and populate tags
     modalTags.innerHTML = "";
