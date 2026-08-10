@@ -496,6 +496,31 @@ header {
   color: var(--accent-cyan);
 }
 
+.timeline-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.skill-tag-sm {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  letter-spacing: 0.3px;
+  transition: var(--transition-bounce);
+}
+
+.skill-tag-sm:hover {
+  background: rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.25);
+  transform: scale(1.05);
+}
+
 /* Projects Section */
 .projects {
   padding: 100px 0;
