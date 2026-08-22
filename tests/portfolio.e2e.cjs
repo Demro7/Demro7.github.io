@@ -97,6 +97,18 @@ test("mobile navigation exposes and updates its expanded state", async () => {
   await page.close();
 });
 
+test("the resume button opens the current shared Google Drive CV", async () => {
+  const { page } = await openPortfolio();
+  const resumeLink = page.getByRole("link", { name: "View Resume" });
+
+  assert.equal(
+    await resumeLink.getAttribute("href"),
+    "https://drive.google.com/file/d/1UwQ9HXogEmM88rHGarYZoNYDlvMbUgY6/view?usp=sharing",
+  );
+  assert.equal(await resumeLink.getAttribute("rel"), "noopener noreferrer");
+  await page.close();
+});
+
 test("rapid project filter changes cannot leave stale hidden cards", async () => {
   const { page } = await openPortfolio();
   await page.getByRole("button", { name: "Computer Vision" }).click();
