@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (navToggle && navLinks) {
     navToggle.addEventListener("click", () => {
       navLinks.classList.toggle("active");
+      navToggle.setAttribute("aria-expanded", String(navLinks.classList.contains("active")));
       const svgEl = navToggle.querySelector("svg");
       if (svgEl) {
         if (navLinks.classList.contains("active")) {
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navLinks.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("active");
+        navToggle.setAttribute("aria-expanded", "false");
         const svgEl = navToggle.querySelector("svg");
         if (svgEl) {
           svgEl.innerHTML = `<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>`;
@@ -50,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let current = "";
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
       if (pageYOffset >= sectionTop - 120) {
         current = section.getAttribute("id");
       }
@@ -58,57 +59,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
     navItems.forEach((item) => {
       item.classList.remove("active");
+      item.removeAttribute("aria-current");
       if (item.getAttribute("href").slice(1) === current) {
         item.classList.add("active");
+        item.setAttribute("aria-current", "page");
       }
     });
   });
 
   // 3. Scroll Reveal Animation via IntersectionObserver
   const revealElements = document.querySelectorAll(".fade-in");
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  revealElements.forEach((el) => {
-    revealObserver.observe(el);
-  });
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if ("IntersectionObserver" in window && !reducedMotion) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.documentElement.classList.add("reveal-enabled");
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    revealElements.forEach((el) => el.classList.add("is-visible"));
+  }
 
   // 4. Project Cards Filtering
   const filterBtns = document.querySelectorAll(".filter-btn");
   const projectCards = document.querySelectorAll(".project-card");
+  const filterTransitionTimers = new WeakMap();
 
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       // Toggle active filter button
-      filterBtns.forEach((b) => b.classList.remove("active"));
+      filterBtns.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-pressed", "false");
+      });
       btn.classList.add("active");
+      btn.setAttribute("aria-pressed", "true");
 
       const filterValue = btn.getAttribute("data-filter");
 
       projectCards.forEach((card) => {
+        const pendingTimer = filterTransitionTimers.get(card);
+        if (pendingTimer !== undefined) {
+          clearTimeout(pendingTimer);
+          filterTransitionTimers.delete(card);
+        }
+
         const cardCategory = card.getAttribute("data-category");
         if (filterValue === "all" || cardCategory === filterValue) {
           card.classList.remove("hidden");
+          card.setAttribute("aria-hidden", "false");
+          card.setAttribute("tabindex", "0");
           // Re-trigger animation
-          setTimeout(() => {
+          const showTimer = setTimeout(() => {
             card.style.opacity = "1";
             card.style.transform = "scale(1)";
+            filterTransitionTimers.delete(card);
           }, 50);
+          filterTransitionTimers.set(card, showTimer);
         } else {
+          card.setAttribute("aria-hidden", "true");
+          card.setAttribute("tabindex", "-1");
           card.style.opacity = "0";
           card.style.transform = "scale(0.9)";
-          setTimeout(() => {
+          const hideTimer = setTimeout(() => {
             card.classList.add("hidden");
+            filterTransitionTimers.delete(card);
           }, 300);
+          filterTransitionTimers.set(card, hideTimer);
         }
       });
     });
@@ -119,8 +144,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "howeya-seo-ai": {
       title: "Howeya SEO-AI (Howeyah)",
       category: "AI & Automation",
-      image: "howeya-seo-ai.jpg",
-      impact: "Achieved 21/21 passing PostgreSQL tests and 394/394 passing regression tests, ensuring production-grade reliability for AI-driven SEO recommendations.",
+      image: "howeya-seo-ai.webp",
+      impact: "Validated platform reliability with 21/21 PostgreSQL tests and 394/394 regression tests passing.",
       desc: "Contributed to an AI-powered SEO platform analyzing, optimizing, and improving WordPress websites through automated AI-driven recommendations and validation workflows. Built multi-stage validation pipelines including live validation, SEO rules, and freshness checks with an evidence management system ensuring recommendations were accurate, auditable, and safe to apply.",
       features: [
         "Built multi-stage validation pipelines (live validation, SEO rules, freshness checks) and evidence management system",
@@ -134,14 +159,14 @@ document.addEventListener("DOMContentLoaded", () => {
     "influencer-classifier": {
       title: "Influencer Video Classifier (Try GC)",
       category: "Computer Vision & Speech",
-      image: "influencer-video-classifier.png",
-      impact: "Automated manual classification workflows across a massive database of 60,000+ creator profiles, fully replacing manual tagging efforts.",
-      desc: "Engineered a scalable production pipeline combining computer vision with speech models to classify creators based on content type, speaking style, and demographics. Integrates Whisper speech recognition with TalkNet active speaker validation and face identification algorithms.",
+      image: "influencer-video-classifier.webp",
+      impact: "Automated multimodal classification across a database of 60,000+ creator profiles.",
+      desc: "Engineered a scalable pipeline combining computer vision and speech models to classify creators by content type and speaking style. Integrated Whisper speech recognition with TalkNet active-speaker validation and face analysis.",
       features: [
         "Multimodal classification using visual face-matching and Whisper speech-to-text",
         "TalkNet integration for precise speaker diarization and audio filtering",
         "Automated bulk classification of 60,000+ creator database items",
-        "Production-grade Python pipelines decoupled for modular integration"
+        "Modular Python pipelines designed for integration with internal workflows"
       ],
       tech: ["Python", "OpenCV", "TalkNet", "Whisper", "FastAPI", "MongoDB"],
       link: "https://github.com/Demro7/influencer-video-classifier"
@@ -149,14 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
     "meeting-assistant": {
       title: "AI Meeting Assistant (Try GC)",
       category: "LLM & Automation",
-      image: "meeting assistant.png",
-      impact: "Bypassed typical browser service worker constraints, allowing secure high-fidelity system-wide meeting recordings and Arabic transcripts.",
+      image: "meeting-assistant.webp",
+      impact: "Used Manifest V3 offscreen documents to support system and microphone audio capture with Arabic transcription.",
       desc: "Engineered a Manifest V3 Chrome Extension utilizing offscreen documents for system audio capture and real-time mixing. Pairs with a stateless FastAPI backend using strict Pydantic inputs to execute transcriptions via Whisper-large-v3 and structure Arabic marketing insights using Llama-3.3 on Groq in strict JSON mode.",
       features: [
         "Manifest V3 Extension incorporating offscreen document audio recording",
         "Dual-channel system/mic sound mixer running smoothly in background script",
         "Stateless FastAPI chunk-uploader with custom typing validation",
-        "High-fidelity Arabic transcriptions and structured JSON marketing insights"
+        "Arabic transcriptions and structured JSON marketing insights"
       ],
       tech: ["FastAPI", "Chrome MV3 Extension", "Groq API", "Whisper", "Pydantic"],
       link: "https://github.com/Demro7/ai-meeting-assistant"
@@ -164,13 +189,13 @@ document.addEventListener("DOMContentLoaded", () => {
     "voltiq": {
       title: "VoltIQ — Smart Electricity Platform",
       category: "Computer Vision / RAG",
-      image: "VoltIQ.png",
+      image: "voltiq.webp",
       impact: "Integrated OCR scanning, depletion predictions, and vector Q&A into a unified microservice framework.",
       desc: "Designed and built an AI-driven electricity diagnostics system. Implemented an OpenCV/PaddleOCR pipeline to scan LCD 7-segment utility displays. Trained XGBoost models to predict electrical load anomaly behaviors and forecast remaining balance. Built a vector RAG database assistant utilizing PGVector, Qdrant, and Gemini/OpenAI.",
       features: [
         "Dynamic OCR utility reading LCD 7-segment digital screens",
         "XGBoost regression forecasting credit depletion timelines",
-        "Robust PGVector/Qdrant vector similarity context RAG utility",
+        "PGVector/Qdrant similarity search for grounded RAG responses",
         "FastAPI microservices deployed in Docker Compose containers"
       ],
       tech: ["FastAPI", "Flask", "YOLOv8", "PaddleOCR", "XGBoost", "PGVector", "Qdrant", "Docker"],
@@ -179,8 +204,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "yaqiz": {
       title: "YAQIZ — AI Safety & Fatigue Monitoring",
       category: "Computer Vision",
-      image: "Yaqiz.png",
-      impact: "Combined object classification and landmarks tracking to monitor workplace PPE and worker alertness at 20+ FPS.",
+      image: "yaqiz.webp",
+      impact: "Combined PPE detection, worker tracking, and facial landmarks to monitor workplace safety and fatigue.",
       desc: "Created a full-stack smart monitoring dashboard. Employs YOLOv8 to detect personal protective equipment (PPE) like helmets and vests, linked with ByteTrack for worker ID persistence. Leverages MediaPipe face landmarks to track blinking rates, eye aspect ratios, and yawn patterns to trigger fatigue alerts.",
       features: [
         "YOLOv8 real-time PPE compliance check (Hard hats, vests, goggles)",
@@ -194,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "digital-employee": {
       title: "Digital Employee – AI Sales Assistant",
       category: "LLM & Automation",
-      image: "Digtal.png",
+      image: "digital-employee.webp",
       impact: "Automated structural order outputs and inventory checks directly from informal client messaging streams.",
       desc: "Designed a bilingual LLM chat assistant designed for small/medium business sector clients. Integrates conversational interfaces with structured JSON output configurations to convert chats into processed sales checkout orders. Includes JWT secure routes, low-stock alerts, and sector-customizable workflows.",
       features: [
@@ -209,59 +234,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "ergoai": {
       title: "ErgoAI – Health & Productivity Assistant",
       category: "Computer Vision",
-      image: "ErgoAI.png",
-      impact: "Won 3rd Place in Mansoura University Computer Vision Course & 3rd Place at regional Ibtikar 8 Innovation Competition.",
+      image: "ergoai.webp",
+      impact: "Won 3rd Place in the Mansoura University Computer Vision Course and 3rd Place in the university-level Ibtikar 8 Innovation Competition.",
       desc: "Developed an AI-powered desktop application utilizing OpenCV to monitor computer users. Calculates eye blink rates to prevent computer vision syndrome, detects yawns, and analyzes posture using spatial alignment checks, warning users of ergonomic strains.",
       features: [
         "Real-time blink counter based on Eye Aspect Ratio (EAR) thresholds",
         "Postural deviation detection based on nose/shoulder alignment coordinates",
-        "Lightweight Tkinter/OpenCV desktop UI rendering at 20+ FPS",
-        "Interactive desktop break reminders and statistics dashboard"
+        "Lightweight Tkinter/OpenCV desktop application",
+        "Real-time OpenCV desktop monitoring at approximately 20 FPS"
       ],
       tech: ["Python", "OpenCV", "Computer Vision", "Tkinter"],
       link: "https://github.com/magedyasse/ErgoAi"
-    },
-    "ecommerce": {
-      title: "E-commerce Spending Prediction",
-      category: "Machine Learning",
-      image: "project-ecommerce.jpg",
-      impact: "Provided customer value forecasts using linear regression models with detailed accuracy visualizers.",
-      desc: "Designed an interactive Streamlit analysis system. Processes historical purchase statistics, executes correlation analysis, and trains a regression model to estimate annual consumer values.",
-      features: [
-        "Interactive Streamlit parameters to test customer profiles",
-        "Exploratory analytics showcasing feature correlations",
-        "Residual diagnostic plots evaluating predictions"
-      ],
-      tech: ["Python", "Streamlit", "Scikit-learn", "Pandas", "Matplotlib"],
-      link: "https://github.com/Demro7/ecommerce-customer-analysis"
-    },
-    "image-segmentation": {
-      title: "GMM Image Segmentation",
-      category: "Machine Learning",
-      image: "project-gmm.jpg",
-      impact: "Improved cluster boundary matching by pre-clustering pixel space configurations with K-Means.",
-      desc: "An unsupervised computer vision script utilizing Gaussian Mixture Models initialized with K-Means centroids to segment pixels of loaded images, showing advanced clustering logic.",
-      features: [
-        "Pre-clustering K-Means initialization module",
-        "Multivariate normal distributions tracking color channels",
-        "Custom segment visualizer separating background details"
-      ],
-      tech: ["Python", "Scikit-learn", "NumPy", "Matplotlib", "OpenCV"],
-      link: "https://github.com/Demro7/image-segmentation-gmm"
-    },
-    "adult-income": {
-      title: "USA Adult Income (UCI) EDA",
-      category: "Data Analysis",
-      image: "project-eda.jpg",
-      impact: "Isolved educational and occupation markers representing the strongest predictors of wage brackets.",
-      desc: "A thorough exploratory data science study evaluating demographics data. Combines missing-value cleaning, feature transformations, and Seaborn profiles to understand salary trends.",
-      features: [
-        "Comprehensive outlier treatments and demographic feature engineering",
-        "Seaborn/Matplotlib correlation heatmap and categorical density plots",
-        "Income bracket distributions split by age, education, and hours worked"
-      ],
-      tech: ["Pandas", "NumPy", "Matplotlib", "Seaborn"],
-      link: "https://github.com/Demro7/USA-Adult-Data-Analysis"
     }
   };
 
@@ -275,11 +258,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalFeatures = document.getElementById("modal-features");
   const modalTechList = document.getElementById("modal-tech-list");
   const modalGithubLink = document.getElementById("modal-github-link");
+  const modalPrivateNote = document.getElementById("modal-private-note");
+  const modalBackgroundElements = [
+    document.querySelector(".skip-link"),
+    document.querySelector("header"),
+    document.querySelector("main"),
+    document.querySelector("footer")
+  ].filter(Boolean);
+  let lastFocusedElement = null;
 
   const openModal = (projectId) => {
     const data = projectsData[projectId];
     if (!data) return;
 
+    lastFocusedElement = document.activeElement;
     modalImg.src = data.image;
     modalImg.alt = data.title;
     modalTitle.textContent = data.title;
@@ -288,8 +280,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (data.link) {
       modalGithubLink.href = data.link;
       modalGithubLink.style.display = "";
+      modalPrivateNote.hidden = true;
     } else {
       modalGithubLink.style.display = "none";
+      modalGithubLink.removeAttribute("href");
+      modalPrivateNote.hidden = false;
     }
 
     // Clear and populate tags
@@ -317,20 +312,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     modalOverlay.classList.add("active");
+    modalOverlay.removeAttribute("inert");
+    modalOverlay.setAttribute("aria-hidden", "false");
+    modalBackgroundElements.forEach((element) => element.setAttribute("inert", ""));
     document.body.style.overflow = "hidden"; // Disable scroll background
+    requestAnimationFrame(() => modalCloseBtn.focus());
   };
 
   const closeModal = () => {
-    modalOverlay.classList.remove("active");
+    if (!modalOverlay.classList.contains("active")) return;
     document.body.style.overflow = ""; // Enable scroll background
+    modalBackgroundElements.forEach((element) => element.removeAttribute("inert"));
+    if (lastFocusedElement instanceof HTMLElement) {
+      lastFocusedElement.focus();
+    }
+    modalOverlay.classList.remove("active");
+    modalOverlay.setAttribute("aria-hidden", "true");
+    modalOverlay.setAttribute("inert", "");
+    lastFocusedElement = null;
   };
 
-  // Add click events to project cards
+  // Open project case studies by pointer or keyboard.
   projectCards.forEach((card) => {
     card.addEventListener("click", () => {
       const projectId = card.getAttribute("data-id");
       if (projectId) {
         openModal(projectId);
+      }
+    });
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openModal(card.getAttribute("data-id"));
       }
     });
   });
@@ -347,10 +360,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Handle ESC key for modal close
+  // Keep keyboard focus inside the open dialog and support Escape.
   document.addEventListener("keydown", (e) => {
+    if (!modalOverlay.classList.contains("active")) return;
     if (e.key === "Escape") {
       closeModal();
+      return;
+    }
+    if (e.key === "Tab") {
+      const focusable = [...modalOverlay.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )].filter((element) => !element.hidden && element.offsetParent !== null);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 
