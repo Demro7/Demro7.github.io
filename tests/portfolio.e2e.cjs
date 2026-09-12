@@ -31,6 +31,9 @@ after(async () => {
 async function openPortfolio(viewport = { width: 1440, height: 1000 }) {
   const page = await browser.newPage({ viewport });
   const errors = [];
+  await page.route("https://fonts.googleapis.com/**", (route) =>
+    route.fulfill({ status: 200, contentType: "text/css", body: "" }),
+  );
   page.on("console", (message) => {
     if (message.type() === "error") errors.push(message.text());
   });
@@ -97,15 +100,34 @@ test("mobile navigation exposes and updates its expanded state", async () => {
   await page.close();
 });
 
-test("the resume button opens the current shared Google Drive CV", async () => {
+test("the resume button opens the current self-hosted CV", async () => {
   const { page } = await openPortfolio();
   const resumeLink = page.getByRole("link", { name: "View Resume" });
 
-  assert.equal(
-    await resumeLink.getAttribute("href"),
-    "https://drive.google.com/file/d/1UwQ9HXogEmM88rHGarYZoNYDlvMbUgY6/view?usp=sharing",
-  );
+  assert.equal(await resumeLink.getAttribute("href"), "Ahmed_Eldemery.pdf");
+  assert.equal(fs.existsSync(path.join(projectRoot, "Ahmed_Eldemery.pdf")), true);
   assert.equal(await resumeLink.getAttribute("rel"), "noopener noreferrer");
+  await page.close();
+});
+
+test("the DEPI Microsoft Machine Learning Engineer certificate is listed and viewable", async () => {
+  const { page } = await openPortfolio();
+  const certificate = page.getByRole("link", { name: "View DEPI certificate" });
+
+  assert.equal(await certificate.getAttribute("href"), "depi-microsoft-machine-learning-engineer-certificate.pdf");
+  assert.equal(
+    fs.existsSync(path.join(projectRoot, "depi-microsoft-machine-learning-engineer-certificate.pdf")),
+    true,
+  );
+  const certificatePanel = certificate.locator("xpath=ancestor::div[contains(@class, 'glass-panel')][1]");
+  assert.equal(
+    await certificatePanel.getByRole("heading", { name: "Certifications & Education" }).count(),
+    1,
+  );
+  assert.match(
+    await certificate.locator("xpath=ancestor::*[contains(@class, 'honor-item')][1]").innerText(),
+    /Digital Egypt Pioneers Program.*Microsoft Machine Learning Engineer.*November 2025.*July 2026/s,
+  );
   await page.close();
 });
 

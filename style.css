@@ -880,6 +880,32 @@ header {
   color: var(--text-secondary);
 }
 
+.certificate-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  color: var(--accent-cyan);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.certificate-link:hover,
+.certificate-link:focus-visible {
+  color: #ffffff;
+}
+
+.certificate-link svg {
+  transition: transform 0.2s ease;
+}
+
+.certificate-link:hover svg,
+.certificate-link:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
 /* Contact Section */
 .contact {
   padding: 100px 0;
